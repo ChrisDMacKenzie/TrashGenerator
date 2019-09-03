@@ -1,4 +1,4 @@
-module github.com/picogen
+module github.com/TrashGenerator
 
 go 1.12
 

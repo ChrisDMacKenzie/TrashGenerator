@@ -12,7 +12,7 @@ import (
 func main() {
 	var w, h int = 240, 240
 	var ops []string
-	operators := getRandomOperators(3)
+	operators := getRandomOperators(NumOperations)
 	for _, o := range operators {
 		o.setSecondaryOps()
 		ops = append(ops, o.print())
