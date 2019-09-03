@@ -19,55 +19,36 @@ type operator interface {
 	print() string
 }
 
-// TotalOperations is the total number of distinct operation types
-const TotalOperations = 10
-
 func getRandomOperators(n int) []operator {
 	var seq []operator
 	for i := 0; i < n; i++ {
+		var op operator
 		idx := r.Intn(100) % TotalOperations
 		switch idx {
 		case 0:
-			op := new(cosine)
-			op.setDefaults()
-			seq = append(seq, op)
+			op = new(cosine)
 		case 1:
-			op := new(sine)
-			op.setDefaults()
-			seq = append(seq, op)
+			op = new(sine)
 		case 2:
-			op := new(subtract)
-			op.setDefaults()
-			seq = append(seq, op)
+			op = new(subtract)
 		case 3:
-			op := new(multiply)
-			op.setDefaults()
-			seq = append(seq, op)
+			op = new(multiply)
 		case 4:
-			op := new(absolute)
-			op.setDefaults()
-			seq = append(seq, op)
+			op = new(absolute)
 		case 5:
-			op := new(squareRoot)
-			op.setDefaults()
-			seq = append(seq, op)
+			op = new(squareRoot)
 		case 6:
-			op := new(floor)
-			op.setDefaults()
-			seq = append(seq, op)
+			op = new(floor)
 		case 7:
-			op := new(max)
-			op.setDefaults()
-			seq = append(seq, op)
+			op = new(max)
 		case 8:
-			op := new(min)
-			op.setDefaults()
-			seq = append(seq, op)
+			op = new(min)
 		case 9:
-			op := new(atan2)
-			op.setDefaults()
-			seq = append(seq, op)
+			op = new(atan2)
+
 		}
+		op.setDefaults()
+		seq = append(seq, op)
 	}
 
 	return seq
