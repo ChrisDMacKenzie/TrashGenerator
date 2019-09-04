@@ -8,9 +8,6 @@ import (
 	"time"
 )
 
-var numbers = []string{"x", "y", "t", "n"}
-var r = rand.New(rand.NewSource(time.Now().UnixNano()))
-
 type operator interface {
 	setDefaults()
 	setSecondaryOps()
@@ -208,7 +205,7 @@ type subtract struct {
 func (s *subtract) setDefaults() {
 	s.primary = true
 	s.numOps = 2
-	s.values = *(new([]string))
+	s.values = []string{"DEFAULT", "DEFAULT"}
 	s.secondaryOps = *(new([]operator))
 	s.rand = 0
 	s.name = "SUBTRACT"
@@ -216,7 +213,10 @@ func (s *subtract) setDefaults() {
 
 func (s *subtract) setValues() {
 	s.primary = false
-	s.values = getRandomValues(numbers, 2)
+	// making sure we don't do like, x-x because that makes it boring
+	for s.values[0] == s.values[1] {
+		s.values = getRandomValues(numbers, 2)
+	}
 	s.rand = generateRandomFloat()
 }
 
@@ -497,7 +497,7 @@ type max struct {
 func (m *max) setDefaults() {
 	m.primary = true
 	m.numOps = 2
-	m.values = *(new([]string))
+	m.values = []string{"DEFAULT", "DEFAULT"}
 	m.secondaryOps = *(new([]operator))
 	m.rand = 0
 	m.name = "MAX"
@@ -505,7 +505,9 @@ func (m *max) setDefaults() {
 
 func (m *max) setValues() {
 	m.primary = false
-	m.values = getRandomValues(numbers, 2)
+	for m.values[0] == m.values[1] {
+		m.values = getRandomValues(numbers, 2)
+	}
 	m.rand = generateRandomFloat()
 }
 
@@ -558,7 +560,7 @@ type min struct {
 func (m *min) setDefaults() {
 	m.primary = true
 	m.numOps = 2
-	m.values = *(new([]string))
+	m.values = []string{"DEFAULT", "DEFAULT"}
 	m.secondaryOps = *(new([]operator))
 	m.rand = 0
 	m.name = "MIN"
@@ -566,7 +568,9 @@ func (m *min) setDefaults() {
 
 func (m *min) setValues() {
 	m.primary = false
-	m.values = getRandomValues(numbers, 2)
+	for m.values[0] == m.values[1] {
+		m.values = getRandomValues(numbers, 2)
+	}
 	m.rand = generateRandomFloat()
 }
 
