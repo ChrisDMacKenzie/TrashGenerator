@@ -24,7 +24,7 @@ func main() {
 
 	var images []*image.Paletted
 	var delays []int
-	steps := 25
+	steps := NumSteps
 	for t := 0; t < steps; t++ {
 		img := image.NewPaletted(image.Rect(0, 0, w, h), palette)
 		images = append(images, img)

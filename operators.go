@@ -90,12 +90,11 @@ type cosine struct {
 	numOps       int
 	secondaryOps []operator
 	rand         float64
-	primary      *bool
+	primary      bool
 }
 
 func (c *cosine) setDefaults() {
-	t := true
-	c.primary = &t
+	c.primary = true
 	c.numOps = 1
 	c.values = *(new([]string))
 	c.secondaryOps = *(new([]operator))
@@ -104,25 +103,20 @@ func (c *cosine) setDefaults() {
 }
 
 func (c *cosine) setValues() {
-	f := false
-	c.primary = &f
-	rvals := getRandomValues(numbers, 1)
-	copyvals := make([]string, len(rvals))
-	copy(copyvals, rvals)
-	c.values = copyvals
+	c.primary = false
+	c.values = getRandomValues(numbers, 1)
 	c.rand = generateRandomFloat()
 }
 
 func (c *cosine) setSecondaryOps() {
 	c.secondaryOps = getRandomOperators(c.numOps)
 	for _, op := range c.secondaryOps {
-		// op.setDefaults()
 		op.setValues()
 	}
 }
 
 func (c *cosine) compute(x, y, t float64) float64 {
-	if *c.primary == true {
+	if c.primary == true {
 		v := c.secondaryOps[0].compute(x, y, t)
 		return math.Cos(v)
 	}
@@ -131,9 +125,8 @@ func (c *cosine) compute(x, y, t float64) float64 {
 }
 
 func (c *cosine) print() string {
-	// fmt.Println(*c.primary, "cosine")
 	var e string
-	if *c.primary == true {
+	if c.primary == true {
 		inner := c.secondaryOps[0].print()
 		e = fmt.Sprintf("cos(%s)", inner)
 	} else {
@@ -153,12 +146,11 @@ type sine struct {
 	numOps       int
 	secondaryOps []operator
 	rand         float64
-	primary      *bool
+	primary      bool
 }
 
 func (s *sine) setDefaults() {
-	t := true
-	s.primary = &t
+	s.primary = true
 	s.numOps = 1
 	s.values = *(new([]string))
 	s.secondaryOps = *(new([]operator))
@@ -167,25 +159,20 @@ func (s *sine) setDefaults() {
 }
 
 func (s *sine) setValues() {
-	f := false
-	s.primary = &f
-	rvals := getRandomValues(numbers, 1)
-	copyvals := make([]string, len(rvals))
-	copy(copyvals, rvals)
-	s.values = copyvals
+	s.primary = false
+	s.values = getRandomValues(numbers, 1)
 	s.rand = generateRandomFloat()
 }
 
 func (s *sine) setSecondaryOps() {
 	s.secondaryOps = getRandomOperators(s.numOps)
 	for _, op := range s.secondaryOps {
-		// op.setDefaults()
 		op.setValues()
 	}
 }
 
 func (s *sine) compute(x, y, t float64) float64 {
-	if *s.primary == true {
+	if s.primary == true {
 		v := s.secondaryOps[0].compute(x, y, t)
 		return math.Sin(v)
 	}
@@ -194,9 +181,8 @@ func (s *sine) compute(x, y, t float64) float64 {
 }
 
 func (s *sine) print() string {
-	// fmt.Println(*s.primary, "sine")
 	var e string
-	if *s.primary == true {
+	if s.primary == true {
 		inner := s.secondaryOps[0].print()
 		e = fmt.Sprintf("sin(%s)", inner)
 	} else {
@@ -216,12 +202,11 @@ type subtract struct {
 	numOps       int
 	secondaryOps []operator
 	rand         float64
-	primary      *bool
+	primary      bool
 }
 
 func (s *subtract) setDefaults() {
-	t := true
-	s.primary = &t
+	s.primary = true
 	s.numOps = 2
 	s.values = *(new([]string))
 	s.secondaryOps = *(new([]operator))
@@ -230,26 +215,20 @@ func (s *subtract) setDefaults() {
 }
 
 func (s *subtract) setValues() {
-	f := false
-	s.primary = &f
-	rvals := getRandomValues(numbers, 2)
-	copyvals := make([]string, len(rvals))
-	copy(copyvals, rvals)
-	s.values = copyvals
+	s.primary = false
+	s.values = getRandomValues(numbers, 2)
 	s.rand = generateRandomFloat()
 }
 
 func (s *subtract) setSecondaryOps() {
 	s.secondaryOps = getRandomOperators(s.numOps)
 	for _, op := range s.secondaryOps {
-		op.setDefaults()
-		// fmt.Printf("%+v\n", op)
 		op.setValues()
 	}
 }
 
 func (s *subtract) compute(x, y, t float64) float64 {
-	if *s.primary == true {
+	if s.primary == true {
 		v1 := s.secondaryOps[0].compute(x, y, t)
 		v2 := s.secondaryOps[1].compute(x, y, t)
 		return v1 - v2
@@ -259,9 +238,8 @@ func (s *subtract) compute(x, y, t float64) float64 {
 }
 
 func (s *subtract) print() string {
-	// fmt.Println(*s.primary, "subtract")
 	var e []string
-	if *s.primary == true {
+	if s.primary == true {
 		for _, op := range s.secondaryOps {
 			e = append(e, op.print())
 		}
@@ -285,12 +263,11 @@ type multiply struct {
 	numOps       int
 	secondaryOps []operator
 	rand         float64
-	primary      *bool
+	primary      bool
 }
 
 func (m *multiply) setDefaults() {
-	t := true
-	m.primary = &t
+	m.primary = true
 	m.numOps = 2
 	m.values = *(new([]string))
 	m.secondaryOps = *(new([]operator))
@@ -299,26 +276,20 @@ func (m *multiply) setDefaults() {
 }
 
 func (m *multiply) setValues() {
-	f := false
-	m.primary = &f
-	rvals := getRandomValues(numbers, 2)
-	copyvals := make([]string, len(rvals))
-	copy(copyvals, rvals)
-	m.values = copyvals
+	m.primary = false
+	m.values = getRandomValues(numbers, 2)
 	m.rand = generateRandomFloat()
 }
 
 func (m *multiply) setSecondaryOps() {
 	m.secondaryOps = getRandomOperators(m.numOps)
 	for _, op := range m.secondaryOps {
-		// op.setDefaults()
-		// fmt.Printf("%+v\n", op)
 		op.setValues()
 	}
 }
 
 func (m *multiply) compute(x, y, t float64) float64 {
-	if *m.primary == true {
+	if m.primary == true {
 		v1 := m.secondaryOps[0].compute(x, y, t)
 		v2 := m.secondaryOps[1].compute(x, y, t)
 		return v1 * v2
@@ -328,9 +299,8 @@ func (m *multiply) compute(x, y, t float64) float64 {
 }
 
 func (m *multiply) print() string {
-	// fmt.Println(*m.primary, "multiply")
 	var e []string
-	if *m.primary == true {
+	if m.primary == true {
 		for _, op := range m.secondaryOps {
 			e = append(e, op.print())
 		}
@@ -353,12 +323,11 @@ type absolute struct {
 	numOps       int
 	secondaryOps []operator
 	rand         float64
-	primary      *bool
+	primary      bool
 }
 
 func (a *absolute) setDefaults() {
-	t := true
-	a.primary = &t
+	a.primary = true
 	a.numOps = 1
 	a.values = *(new([]string))
 	a.secondaryOps = *(new([]operator))
@@ -367,26 +336,20 @@ func (a *absolute) setDefaults() {
 }
 
 func (a *absolute) setValues() {
-	f := false
-	a.primary = &f
-	rvals := getRandomValues(numbers, 1)
-	copyvals := make([]string, len(rvals))
-	copy(copyvals, rvals)
-	a.values = copyvals
+	a.primary = false
+	a.values = getRandomValues(numbers, 1)
 	a.rand = generateRandomFloat()
 }
 
 func (a *absolute) setSecondaryOps() {
 	a.secondaryOps = getRandomOperators(a.numOps)
 	for _, op := range a.secondaryOps {
-		// op.setDefaults()
-		// fmt.Printf("%+v\n", op)
 		op.setValues()
 	}
 }
 
 func (a *absolute) compute(x, y, t float64) float64 {
-	if *a.primary == true {
+	if a.primary == true {
 		v := a.secondaryOps[0].compute(x, y, t)
 		return math.Abs(v)
 	}
@@ -395,9 +358,8 @@ func (a *absolute) compute(x, y, t float64) float64 {
 }
 
 func (a *absolute) print() string {
-	// fmt.Println(*a.primary, "absolute")
 	var e string
-	if *a.primary == true {
+	if a.primary == true {
 		inner := a.secondaryOps[0].print()
 		e = fmt.Sprintf("abs(%s)", inner)
 	} else {
@@ -417,12 +379,11 @@ type squareRoot struct {
 	numOps       int
 	secondaryOps []operator
 	rand         float64
-	primary      *bool
+	primary      bool
 }
 
 func (s *squareRoot) setDefaults() {
-	t := true
-	s.primary = &t
+	s.primary = true
 	s.numOps = 1
 	s.values = *(new([]string))
 	s.secondaryOps = *(new([]operator))
@@ -431,26 +392,20 @@ func (s *squareRoot) setDefaults() {
 }
 
 func (s *squareRoot) setValues() {
-	f := false
-	s.primary = &f
-	rvals := getRandomValues(numbers, 1)
-	copyvals := make([]string, len(rvals))
-	copy(copyvals, rvals)
-	s.values = copyvals
+	s.primary = false
+	s.values = getRandomValues(numbers, 1)
 	s.rand = generateRandomFloat()
 }
 
 func (s *squareRoot) setSecondaryOps() {
 	s.secondaryOps = getRandomOperators(s.numOps)
 	for _, op := range s.secondaryOps {
-		// op.setDefaults()
-		// fmt.Printf("%+v\n", op)
 		op.setValues()
 	}
 }
 
 func (s *squareRoot) compute(x, y, t float64) float64 {
-	if *s.primary == true {
+	if s.primary == true {
 		v := s.secondaryOps[0].compute(x, y, t)
 		return math.Sqrt(v)
 	}
@@ -459,9 +414,8 @@ func (s *squareRoot) compute(x, y, t float64) float64 {
 }
 
 func (s *squareRoot) print() string {
-	// fmt.Println(*s.primary, "sqrt")
 	var e string
-	if *s.primary == true {
+	if s.primary == true {
 		inner := s.secondaryOps[0].print()
 		e = fmt.Sprintf("sqrt(%s)", inner)
 	} else {
@@ -481,12 +435,11 @@ type floor struct {
 	numOps       int
 	secondaryOps []operator
 	rand         float64
-	primary      *bool
+	primary      bool
 }
 
 func (f *floor) setDefaults() {
-	t := true
-	f.primary = &t
+	f.primary = true
 	f.numOps = 1
 	f.values = *(new([]string))
 	f.secondaryOps = *(new([]operator))
@@ -495,26 +448,20 @@ func (f *floor) setDefaults() {
 }
 
 func (f *floor) setValues() {
-	fa := false
-	f.primary = &fa
-	rvals := getRandomValues(numbers, 1)
-	copyvals := make([]string, len(rvals))
-	copy(copyvals, rvals)
-	f.values = copyvals
+	f.primary = false
+	f.values = getRandomValues(numbers, 1)
 	f.rand = generateRandomFloat()
 }
 
 func (f *floor) setSecondaryOps() {
 	f.secondaryOps = getRandomOperators(f.numOps)
 	for _, op := range f.secondaryOps {
-		// op.setDefaults()
-		// fmt.Printf("%+v\n", op)
 		op.setValues()
 	}
 }
 
 func (f *floor) compute(x, y, t float64) float64 {
-	if *f.primary == true {
+	if f.primary == true {
 		v := f.secondaryOps[0].compute(x, y, t)
 		return math.Floor(v)
 	}
@@ -523,9 +470,8 @@ func (f *floor) compute(x, y, t float64) float64 {
 }
 
 func (f *floor) print() string {
-	// fmt.Println(*f.primary, "floor")
 	var e string
-	if *f.primary == true {
+	if f.primary == true {
 		inner := f.secondaryOps[0].print()
 		e = fmt.Sprintf("floor(%s)", inner)
 	} else {
@@ -545,12 +491,11 @@ type max struct {
 	numOps       int
 	secondaryOps []operator
 	rand         float64
-	primary      *bool
+	primary      bool
 }
 
 func (m *max) setDefaults() {
-	t := true
-	m.primary = &t
+	m.primary = true
 	m.numOps = 2
 	m.values = *(new([]string))
 	m.secondaryOps = *(new([]operator))
@@ -559,26 +504,20 @@ func (m *max) setDefaults() {
 }
 
 func (m *max) setValues() {
-	f := false
-	m.primary = &f
-	rvals := getRandomValues(numbers, 2)
-	copyvals := make([]string, len(rvals))
-	copy(copyvals, rvals)
-	m.values = copyvals
+	m.primary = false
+	m.values = getRandomValues(numbers, 2)
 	m.rand = generateRandomFloat()
 }
 
 func (m *max) setSecondaryOps() {
 	m.secondaryOps = getRandomOperators(m.numOps)
 	for _, op := range m.secondaryOps {
-		// op.setDefaults()
-		// fmt.Printf("%+v\n", op)
 		op.setValues()
 	}
 }
 
 func (m *max) compute(x, y, t float64) float64 {
-	if *m.primary == true {
+	if m.primary == true {
 		v1 := m.secondaryOps[0].compute(x, y, t)
 		v2 := m.secondaryOps[1].compute(x, y, t)
 		return math.Max(v1, v2)
@@ -588,9 +527,8 @@ func (m *max) compute(x, y, t float64) float64 {
 }
 
 func (m *max) print() string {
-	// fmt.Println(*m.primary, "max")
 	var e []string
-	if *m.primary == true {
+	if m.primary == true {
 		for _, op := range m.secondaryOps {
 			e = append(e, op.print())
 		}
@@ -614,12 +552,11 @@ type min struct {
 	numOps       int
 	secondaryOps []operator
 	rand         float64
-	primary      *bool
+	primary      bool
 }
 
 func (m *min) setDefaults() {
-	t := true
-	m.primary = &t
+	m.primary = true
 	m.numOps = 2
 	m.values = *(new([]string))
 	m.secondaryOps = *(new([]operator))
@@ -628,26 +565,20 @@ func (m *min) setDefaults() {
 }
 
 func (m *min) setValues() {
-	f := false
-	m.primary = &f
-	rvals := getRandomValues(numbers, 2)
-	copyvals := make([]string, len(rvals))
-	copy(copyvals, rvals)
-	m.values = copyvals
+	m.primary = false
+	m.values = getRandomValues(numbers, 2)
 	m.rand = generateRandomFloat()
 }
 
 func (m *min) setSecondaryOps() {
 	m.secondaryOps = getRandomOperators(m.numOps)
 	for _, op := range m.secondaryOps {
-		// op.setDefaults()
-		// fmt.Printf("%+v\n", op)
 		op.setValues()
 	}
 }
 
 func (m *min) compute(x, y, t float64) float64 {
-	if *m.primary == true {
+	if m.primary == true {
 		v1 := m.secondaryOps[0].compute(x, y, t)
 		v2 := m.secondaryOps[1].compute(x, y, t)
 		return math.Max(v1, v2)
@@ -657,9 +588,8 @@ func (m *min) compute(x, y, t float64) float64 {
 }
 
 func (m *min) print() string {
-	// fmt.Println(*m.primary, "min")
 	var e []string
-	if *m.primary == true {
+	if m.primary == true {
 		for _, op := range m.secondaryOps {
 			e = append(e, op.print())
 		}
@@ -683,12 +613,11 @@ type atan2 struct {
 	numOps       int
 	secondaryOps []operator
 	rand         float64
-	primary      *bool
+	primary      bool
 }
 
 func (a *atan2) setDefaults() {
-	t := true
-	a.primary = &t
+	a.primary = true
 	a.numOps = 2
 	a.values = *(new([]string))
 	a.secondaryOps = *(new([]operator))
@@ -697,26 +626,20 @@ func (a *atan2) setDefaults() {
 }
 
 func (a *atan2) setValues() {
-	f := false
-	a.primary = &f
-	rvals := getRandomValues(numbers, 2)
-	copyvals := make([]string, len(rvals))
-	copy(copyvals, rvals)
-	a.values = copyvals
+	a.primary = false
+	a.values = getRandomValues(numbers, 2)
 	a.rand = generateRandomFloat()
 }
 
 func (a *atan2) setSecondaryOps() {
 	a.secondaryOps = getRandomOperators(a.numOps)
 	for _, op := range a.secondaryOps {
-		// op.setDefaults()
-		// fmt.Printf("%+v\n", op)
 		op.setValues()
 	}
 }
 
 func (a *atan2) compute(x, y, t float64) float64 {
-	if *a.primary == true {
+	if a.primary == true {
 		v1 := a.secondaryOps[0].compute(x, y, t)
 		v2 := a.secondaryOps[1].compute(x, y, t)
 		return math.Atan2(v1, v2)
@@ -726,9 +649,8 @@ func (a *atan2) compute(x, y, t float64) float64 {
 }
 
 func (a *atan2) print() string {
-	// fmt.Println(*a.primary, "atan2")
 	var e []string
-	if *a.primary == true {
+	if a.primary == true {
 		for _, op := range a.secondaryOps {
 			e = append(e, op.print())
 		}

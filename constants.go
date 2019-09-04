@@ -4,4 +4,5 @@ package main
 const (
 	TotalOperations = 10
 	NumOperations   = 3
+	NumSteps        = 25
 )
