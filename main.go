@@ -10,7 +10,6 @@ import (
 	"fyne.io/fyne/widget"
 )
 
-var currentDir, _ = os.Getwd()
 var giffile = "rgb.gif"
 var pChoice = defaultPalette
 var rChoice = defaultRatio
