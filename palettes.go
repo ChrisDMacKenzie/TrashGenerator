@@ -22,3 +22,12 @@ var pico8 = []color.Color{
 	color.RGBA{255, 119, 168, 1},
 	color.RGBA{255, 204, 170, 1},
 }
+
+func paletteSetter(s string) {
+	pChoice = s
+}
+
+var palettes = []string{"pico8"}
+var paletteMap = map[string][]color.Color{
+	"pico8": pico8,
+}

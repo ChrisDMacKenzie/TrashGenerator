@@ -1,26 +1,22 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"image/gif"
 	"math"
 	"os"
-	"strings"
 )
 
-func generate() {
-	var w, h int = 240, 240
+func generate(p, r string) {
+	palette := paletteMap[p]
+	ratio := aspectRatios[r]
+	w, h := ratio[0], ratio[1]
 	var ops []string
 	operators := getRandomOperators(NumOperations)
 	for _, o := range operators {
 		o.setSecondaryOps()
 		ops = append(ops, o.print())
 	}
-
-	expr := strings.Join(ops, "*")
-	fmt.Println(expr)
-	palette := pico8
 
 	var images []*image.Paletted
 	var delays []int

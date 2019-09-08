@@ -10,6 +10,8 @@ const (
 	TotalOperations = 10
 	NumOperations   = 3
 	NumSteps        = 25
+	defaultPalette  = "pico8"
+	defaultRatio    = "1:1"
 )
 
 var (
@@ -18,4 +20,8 @@ var (
 
 var (
 	r = rand.New(rand.NewSource(time.Now().UnixNano()))
+)
+
+var (
+	paletteNames = []string{"pico8"}
 )
