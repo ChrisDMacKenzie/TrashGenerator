@@ -10,20 +10,18 @@ import (
 	"fyne.io/fyne/widget"
 )
 
-var initfile = "init.gif"
+var currentDir, _ = os.Getwd()
 var giffile = "rgb.gif"
 var pChoice = defaultPalette
 var rChoice = defaultRatio
 
 func main() {
-	f, _ := os.Open(initfile)
-	g, _ := gif.DecodeAll(f)
-	f.Close()
+	init := NothingGIF()
 	var t = &trash{
-		gif:      g,
-		image:    g.Image[0],
+		gif:      init,
+		image:    init.Image[0],
 		imageIdx: 0,
-		length:   len(g.Image),
+		length:   1,
 		hidden:   false,
 		size:     fyne.Size{500, 500},
 	}
@@ -37,7 +35,7 @@ func main() {
 		widget.NewButton("Create", func() {
 			generate(pChoice, rChoice)
 			f, _ := os.Open(giffile)
-			g, _ = gif.DecodeAll(f)
+			g, _ := gif.DecodeAll(f)
 			t.gif = g
 			t.image = g.Image[0]
 			t.imageIdx = 0

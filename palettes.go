@@ -23,6 +23,10 @@ var pico8 = []color.Color{
 	color.RGBA{255, 204, 170, 1},
 }
 
+var initPalette = []color.Color{
+	color.RGBA{0, 0, 0, 1},
+}
+
 func paletteSetter(s string) {
 	pChoice = s
 }
