@@ -450,7 +450,7 @@ func (f *floor) setDefaults() {
 func (f *floor) setValues() {
 	f.primary = false
 	f.values = getRandomValues(numbers, 1)
-	f.rand = generateRandomFloat()
+	f.rand = generateRandomFloat() + 1
 }
 
 func (f *floor) setSecondaryOps() {
