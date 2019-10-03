@@ -64,7 +64,7 @@ type trashRenderer struct {
 }
 
 func (t *trashRenderer) MinSize() fyne.Size {
-	return fyne.NewSize(750, 600)
+	return fyne.NewSize(2000, 1080)
 }
 
 func (t *trashRenderer) Layout(size fyne.Size) {
