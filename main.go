@@ -44,10 +44,14 @@ func main() {
 				aspectRatios[rChoice][0] * 2,
 				aspectRatios[rChoice][1] * 2,
 			}
+			if rChoice == "big" {
+				newSize.Width = newSize.Width / 4
+				newSize.Height = newSize.Height / 4
+			}
 			t.Resize(newSize)
 			newPosition := fyne.Position{
-				(750 - t.size.Width) / 2,
-				99 + ((600 - t.size.Height) / 2),
+				(1000 - t.size.Width) / 2,
+				99 + ((750 - t.size.Height) / 2),
 			}
 			t.Move(newPosition)
 			f.Close()
