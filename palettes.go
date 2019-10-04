@@ -24,7 +24,7 @@ var pico8 = []color.Color{
 }
 
 var girlgang1 = []color.Color{
-	color.RGBA{0, 0, 0, 1},
+	// color.RGBA{255, 255, 255, 1},
 	color.RGBA{208, 119, 211, 1},
 	color.RGBA{122, 207, 214, 1},
 	color.RGBA{23, 187, 187, 1},
@@ -53,6 +53,6 @@ func paletteSetter(s string) {
 
 var palettes = []string{"pico8", "girlgang1"}
 var paletteMap = map[string][]color.Color{
-	"pico8": pico8,
+	"pico8":     pico8,
 	"girlgang1": girlgang1,
 }
